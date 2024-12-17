@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/template.dir/main.cpp.o CMakeFiles/template.dir/options_parser/options_parser.cpp.o -o template  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0
