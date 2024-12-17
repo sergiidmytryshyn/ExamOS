@@ -84,30 +84,6 @@ public:
 
     void wait_barrier();
 
-    template<typename T>
-    void sync_send(int dest, T& value) {
-        std::string dest_name = "data_" + std::to_string(dest);
-        T* addr = shm->construct<T>(dest_name.c_str())(value);
-        std::memcpy(addr, &value, sizeof(T));
-//        sem_vector[dest]->post();
-        sem_vector[rank]->wait();
-    }
-
-    template<typename T>
-    void sync_receive(int src, T& value) {
-        sem_vector[src]->wait();
-        std::string src_name = "data_" + std::to_string(src);
-        T* addr = shm->find<T>(src_name.c_str()).first;
-        if (addr) {
-            std::memcpy(&value, addr, sizeof(T));
-            shm->destroy<T>(src_name.c_str());
-        } else {
-            std::cerr << "Error: Data not found in shared memory for source " << src << std::endl;
-        }
-
-        sem_vector[src]->post();
-    }
-
 };
 
 
